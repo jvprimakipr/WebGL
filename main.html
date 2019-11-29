@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="glMatrix_0.9.5.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="webgl_utils.js"></script>
+    <title> Meu pequeno WebGL</title>
+
+    <script id="shader-vs" type="x-shader/x-vertex">
+        attribute vec3 aVertexPosition;
+        attribute vec4 aVertexColor;
+        uniform mat4 uMMatrix;
+        uniform mat4 uVMatrix;
+        uniform mat4 uPMatrix;
+        varying vec4 vColor;
+        void main(void){
+            gl_Position = uPMatrix * uVMatrix * uMMatrix *
+            vec4(aVertexPosition, 1.0);
+            vColor = aVertexColor;
+        }
+    </script>
+    <script id="shader-fs" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec4 vColor;
+        void main(void){
+	        gl_FragColor = vColor;
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="heading">Um cubo e uma pirâmide :)</h1>
+    
+    <canvas id="canvas-webgl" width="500" height="500" style="border:none"></canvas>
+	
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
