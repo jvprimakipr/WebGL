@@ -136,37 +136,52 @@ function startBuffers(){
     vertices = [
         // Frente
         -1.0, -1.0,  1.0,
-        1.0, -1.0,  1.0,
-        1.0,  1.0,  1.0,
+         1.0, -1.0,  1.0,
+         1.0,  1.0,  1.0,
         -1.0,  1.0,  1.0,
         // Trás
         -1.0, -1.0, -1.0,
         -1.0,  1.0, -1.0,
-        1.0,  1.0, -1.0,
-        1.0, -1.0, -1.0,
+         1.0,  1.0, -1.0,
+         1.0, -1.0, -1.0,
         // Topo
         -1.0,  1.0, -1.0,
         -1.0,  1.0,  1.0,
-        1.0,  1.0,  1.0,
-        1.0,  1.0, -1.0,
+         1.0,  1.0,  1.0,
+         1.0,  1.0, -1.0,
         // Base
         -1.0, -1.0, -1.0,
-        1.0, -1.0, -1.0,
-        1.0, -1.0,  1.0,
+         1.0, -1.0, -1.0,
+         1.0, -1.0,  1.0,
         -1.0, -1.0,  1.0,
         // Direita
-        1.0, -1.0, -1.0,
-        1.0,  1.0, -1.0,
-        1.0,  1.0,  1.0,
-        1.0, -1.0,  1.0,
+         1.0, -1.0, -1.0,
+         1.0,  1.0, -1.0,
+         1.0,  1.0,  1.0,
+         1.0, -1.0,  1.0,
         // Esquerda
         -1.0, -1.0, -1.0,
         -1.0, -1.0,  1.0,
         -1.0,  1.0,  1.0,
-        -1.0,  1.0, -1.0];
+        -1.0,  1.0, -1.0,
+        // Porta
+         0.0, -1.0, 1.01,
+         0.6, -1.0, 1.01,
+         0.6,  0.4, 1.01,
+         0.0,  0.4, 1.01,
+        // Janela1
+        -1.01,-0.3,  0.3,
+        -1.01,-0.3, -0.3,
+        -1.01, 0.3, -0.3,
+        -1.01, 0.3,  0.3,
+        // Janela2
+         1.01,-0.3,  0.3,
+         1.01,-0.3, -0.3,
+         1.01, 0.3, -0.3,
+         1.01, 0.3,  0.3]
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
     cubeVertexPositionBuffer.itemSize = 3;
-    cubeVertexPositionBuffer.numItems = 24;
+    cubeVertexPositionBuffer.numItems = 36;
 
     cubeVertexColorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexColorBuffer);
@@ -176,7 +191,10 @@ function startBuffers(){
         [0.0, 0.0, 0.0, 1.0],     // Topo
         [0.0, 0.0, 0.0, 1.0],     // Base
         [0.8, 0.8, 0.0, 1.0],     // Direita
-        [0.8, 0.8, 0.0, 1.0]];    // Esquerda
+        [0.8, 0.8, 0.0, 1.0],     // Esquerda
+        [0.2, 0.1, 0.0, 1.0],     // Porta
+        [0.68, 0.85, 0.90, 1.0],  // Janela1
+        [0.68, 0.85, 0.90, 1.0]]; // Janela2
     coresReplicadas = [];
     for (var i in cores) {
         var cor = cores[i];
@@ -186,20 +204,23 @@ function startBuffers(){
       }
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(coresReplicadas), gl.STATIC_DRAW);
     cubeVertexColorBuffer.itemSize = 4;
-    cubeVertexColorBuffer.numItems = 24;
+    cubeVertexColorBuffer.numItems = 36;
 
     cubeVertexIndexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
     var indices = [
-        0, 1, 2,      0, 2, 3,    // Frente
-        4, 5, 6,      4, 6, 7,    // Trás
-        8, 9, 10,     8, 10, 11,  // Topo
-        12, 13, 14,   12, 14, 15, // Base
-        16, 17, 18,   16, 18, 19, // Direita
-        20, 21, 22,   20, 22, 23]  // Esquerda
+        0, 1, 2,      0, 2, 3,     // Frente
+        4, 5, 6,      4, 6, 7,     // Trás
+        8, 9, 10,     8, 10, 11,   // Topo
+        12, 13, 14,   12, 14, 15,  // Base
+        16, 17, 18,   16, 18, 19,  // Direita
+        20, 21, 22,   20, 22, 23,  // Esquerda
+        24, 25, 26,   24, 26, 27,  // Porta
+        28, 29, 30,   28, 30, 31,  // Janela1
+        32, 33, 34,   32, 34, 35]; // Janela2
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
     cubeVertexIndexBuffer.itemSize = 1;
-    cubeVertexIndexBuffer.numItems = 36;
+    cubeVertexIndexBuffer.numItems = 54;
 }
 
 function startAmbient(){
